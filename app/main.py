@@ -2,8 +2,8 @@
 from pathlib import Path
 
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.core.config import settings
 from app.schemas.api_schemas import HealthResponse
@@ -17,7 +17,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS configuration
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -29,23 +29,32 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-# Health endpoint
-@app.get("/health", response_model=HealthResponse)
+
+@app.get("/health", response_model=HealthResponse, tags=["Health"])
 def health_check():
     return HealthResponse(
         status="healthy",
         application=settings.APP_NAME
     )
 
-# Register API routes
+
 app.include_router(document_router)
 app.include_router(chat_router)
 
-# Frontend directory
+
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+
+if not FRONTEND_DIR.exists():
+    raise RuntimeError(
+        f"Frontend directory not found: {FRONTEND_DIR}"
+    )
+
 
 app.mount(
     "/",
-    StaticFiles(directory=str(FRONTEND_DIR), html=True),
+    StaticFiles(
+        directory=str(FRONTEND_DIR),
+        html=True
+    ),
     name="frontend"
 )
