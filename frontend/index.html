@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KnowledgeIQ | Enterprise AI Workspace</title>
+
+    <meta name="description"
+          content="Enterprise Knowledge Intelligence powered by RAG and Gemini.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">
+                <i data-lucide="brain-circuit"></i>
+            </div>
+
+            <div class="brand-info">
+                <h2>KnowledgeIQ</h2>
+                <span>ENTERPRISE AI</span>
+            </div>
+
+            <button class="sidebar-close" id="sidebarClose"
+                    aria-label="Close sidebar">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+
+        <div class="sidebar-content">
+
+            <div class="nav-section">
+                <p class="nav-heading">WORKSPACE</p>
+
+                <button class="nav-item active" data-page="dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Overview</span>
+                </button>
+
+                <button class="nav-item" data-page="chat">
+                    <i data-lucide="message-square"></i>
+                    <span>AI Assistant</span>
+                </button>
+
+                <button class="nav-item" data-page="documents">
+                    <i data-lucide="files"></i>
+                    <span>Documents</span>
+                </button>
+            </div>
+
+            <div class="nav-section">
+                <p class="nav-heading">MANAGEMENT</p>
+
+                <button class="nav-item" data-page="knowledge">
+                    <i data-lucide="database"></i>
+                    <span>Knowledge Base</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+                <span class="status-indicator" id="sidebarStatusDot"></span>
+
+                <div>
+                    <strong>System Status</strong>
+                    <small id="sidebarStatus">Checking connection...</small>
+                </div>
+            </div>
+
+            <button class="nav-item" data-page="settings">
+                <i data-lucide="settings"></i>
+                <span>Settings</span>
+            </button>
+
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="menu-toggle" id="menuToggle"
+                        aria-label="Open sidebar">
+                    <i data-lucide="menu"></i>
+                </button>
+
+                <div class="breadcrumb">
+                    <span>Workspace</span>
+                    <i data-lucide="chevron-right"></i>
+                    <strong id="breadcrumbPage">Overview</strong>
+                </div>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="connection-status">
+                    <span class="status-indicator" id="topbarStatusDot"></span>
+                    <span id="topbarStatus">Connecting</span>
+                </div>
+
+                <button class="icon-button" id="refreshButton"
+                        title="Refresh dashboard">
+                    <i data-lucide="refresh-cw"></i>
+                </button>
+
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE CONTENT -->
+        <div class="page-container">
+
+
+            <!-- DASHBOARD PAGE -->
+            <section class="page active" id="dashboardPage">
+
+                <div class="page-heading">
+                    <div>
+                        <p class="eyebrow">YOUR WORKSPACE</p>
+                        <h1>Welcome to KnowledgeIQ</h1>
+
+                        <p class="page-description">
+                            Your intelligent workspace for enterprise knowledge.
+                        </p>
+                    </div>
+
+                    <button class="primary-button" data-navigate="chat">
+                        <i data-lucide="message-square"></i>
+                        Start a conversation
+                    </button>
+                </div>
+
+
+                <!-- HERO -->
+                <div class="hero-card">
+
+                    <div class="hero-content">
+
+                        <div class="hero-label">
+                            <i data-lucide="sparkles"></i>
+                            AI KNOWLEDGE ASSISTANT
+                        </div>
+
+                        <h2>
+                            Your knowledge,<br>
+                            one conversation away.
+                        </h2>
+
+                        <p>
+                            Ask questions, explore your documents and
+                            get intelligent answers powered by RAG and Gemini.
+                        </p>
+
+                        <button class="hero-button" data-navigate="chat">
+                            Explore AI Assistant
+                            <i data-lucide="arrow-up-right"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="hero-decoration">
+                        <div class="decoration-circle circle-one"></div>
+                        <div class="decoration-circle circle-two"></div>
+
+                        <div class="hero-icon">
+                            <i data-lucide="brain-circuit"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- STATISTICS -->
+                <div class="section-heading">
+                    <div>
+                        <h2>Workspace Overview</h2>
+                        <p>Your knowledge base at a glance.</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon">
+                                <i data-lucide="files"></i>
+                            </div>
+
+                            <span class="stat-label">DOCUMENTS</span>
+                        </div>
+
+                        <h3 id="totalDocuments">--</h3>
+                        <p>Total uploaded documents</p>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon">
+                                <i data-lucide="database"></i>
+                            </div>
+
+                            <span class="stat-label">KNOWLEDGE BASE</span>
+                        </div>
+
+                        <h3 id="knowledgeStatus">--</h3>
+                        <p>Knowledge storage status</p>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon">
+                                <i data-lucide="server"></i>
+                            </div>
+
+                            <span class="stat-label">API STATUS</span>
+                        </div>
+
+                        <h3 id="apiStatus">Checking</h3>
+                        <p>Backend connectivity</p>
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT DOCUMENTS -->
+                <div class="section-heading recent-heading">
+                    <div>
+                        <h2>Recent Documents</h2>
+                        <p>Your latest uploaded documents.</p>
+                    </div>
+
+                    <button class="text-button" data-navigate="documents">
+                        View all
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="table-card">
+
+                    <div class="table-header">
+                        <span>DOCUMENT NAME</span>
+                        <span>TYPE</span>
+                        <span>FILE SIZE</span>
+                        <span>STATUS</span>
+                    </div>
+
+                    <div id="recentDocuments">
+                        <div class="empty-state">
+                            <i data-lucide="folder-open"></i>
+                            <p>No documents uploaded yet.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- AI CHAT PAGE -->
+            <section class="page" id="chatPage">
+
+                <div class="page-heading chat-heading">
+                    <div>
+                        <p class="eyebrow">INTELLIGENT SEARCH</p>
+                        <h1>AI Assistant</h1>
+
+                        <p class="page-description">
+                            Ask anything about your uploaded documents.
+                        </p>
+                    </div>
+
+                    <div class="chat-model">
+                        <span class="status-indicator"></span>
+                        Gemini AI
+                    </div>
+                </div>
+
+
+                <div class="chat-layout">
+
+                    <div class="chat-card">
+
+                        <div class="chat-topbar">
+                            <div>
+                                <h3>Knowledge Assistant</h3>
+                                <p>Answers grounded in your documents</p>
+                            </div>
+
+                            <button class="icon-button" id="clearChat"
+                                    title="Clear conversation">
+                                <i data-lucide="trash-2"></i>
+                            </button>
+                        </div>
+
+
+                        <!-- CHAT MESSAGES -->
+                        <div class="chat-messages" id="chatMessages">
+
+                            <div class="welcome-message">
+
+                                <div class="welcome-icon">
+                                    <i data-lucide="brain-circuit"></i>
+                                </div>
+
+                                <h2>How can I help you today?</h2>
+
+                                <p>
+                                    Ask questions about your knowledge base
+                                    and I'll find relevant information for you.
+                                </p>
+
+                                <div class="suggestion-list">
+
+                                    <button class="suggestion"
+                                            data-question="Summarize my uploaded documents.">
+                                        <i data-lucide="file-text"></i>
+                                        Summarize my documents
+                                    </button>
+
+                                    <button class="suggestion"
+                                            data-question="What are the key topics in my documents?">
+                                        <i data-lucide="lightbulb"></i>
+                                        Find key topics
+                                    </button>
+
+                                    <button class="suggestion"
+                                            data-question="Explain the most important information in my knowledge base.">
+                                        <i data-lucide="search"></i>
+                                        Discover important insights
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CHAT INPUT -->
+                        <form class="chat-input-area" id="chatForm">
+
+                            <div class="chat-input-wrapper">
+
+                                <textarea
+                                    id="chatInput"
+                                    placeholder="Ask a question about your documents..."
+                                    rows="1"
+                                    maxlength="2000"
+                                    required
+                                ></textarea>
+
+                                <div class="chat-input-bottom">
+
+                                    <span class="input-hint">
+                                        <i data-lucide="shield-check"></i>
+                                        Answers based on your documents
+                                    </span>
+
+                                    <button type="submit"
+                                            class="send-button"
+                                            id="sendButton"
+                                            aria-label="Send message">
+                                        <i data-lucide="arrow-up"></i>
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- DOCUMENTS PAGE -->
+            <section class="page" id="documentsPage">
+
+                <div class="page-heading">
+
+                    <div>
+                        <p class="eyebrow">KNOWLEDGE MANAGEMENT</p>
+                        <h1>Documents</h1>
+
+                        <p class="page-description">
+                            Upload and manage your knowledge base documents.
+                        </p>
+                    </div>
+
+                    <button class="primary-button" id="uploadTrigger">
+                        <i data-lucide="upload"></i>
+                        Upload document
+                    </button>
+
+                </div>
+
+
+                <!-- UPLOAD AREA -->
+                <div class="upload-card" id="uploadArea">
+
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept=".pdf,.docx"
+                        hidden
+                    >
+
+                    <div class="upload-icon">
+                        <i data-lucide="cloud-upload"></i>
+                    </div>
+
+                    <h3>Upload your documents</h3>
+
+                    <p>
+                        Drag and drop your files here or browse your computer.
+                    </p>
+
+                    <button class="secondary-button" id="browseFiles">
+                        Browse files
+                    </button>
+
+                    <span class="upload-note">
+                        Supported formats: PDF and DOCX
+                    </span>
+
+                    <div id="uploadProgress" class="upload-progress"
+                         hidden>
+                        <div class="progress-track">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+
+                        <p id="uploadMessage">Uploading document...</p>
+                    </div>
+
+                </div>
+
+
+                <!-- DOCUMENT LIST -->
+                <div class="section-heading documents-list-heading">
+
+                    <div>
+                        <h2>All Documents</h2>
+                        <p id="documentCount">0 documents</p>
+                    </div>
+
+                    <button class="icon-button" id="refreshDocuments"
+                            title="Refresh documents">
+                        <i data-lucide="refresh-cw"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-header">
+                        <span>DOCUMENT NAME</span>
+                        <span>TYPE</span>
+                        <span>FILE SIZE</span>
+                        <span>ACTION</span>
+                    </div>
+
+                    <div id="documentList">
+                        <div class="empty-state">
+                            <i data-lucide="folder-open"></i>
+                            <p>No documents found.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- KNOWLEDGE BASE PAGE -->
+            <section class="page" id="knowledgePage">
+
+                <div class="page-heading">
+                    <div>
+                        <p class="eyebrow">RETRIEVAL SYSTEM</p>
+                        <h1>Knowledge Base</h1>
+                        <p class="page-description">
+                            Manage your indexed enterprise knowledge.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="placeholder-card">
+                    <div class="placeholder-icon">
+                        <i data-lucide="database"></i>
+                    </div>
+
+                    <h2>Knowledge Base</h2>
+
+                    <p>
+                        Your document embeddings and vector database
+                        are managed by the RAG backend.
+                    </p>
+
+                    <button class="primary-button"
+                            data-navigate="documents">
+                        Manage documents
+                    </button>
+                </div>
+
+            </section>
+
+
+            <!-- SETTINGS PAGE -->
+            <section class="page" id="settingsPage">
+
+                <div class="page-heading">
+                    <div>
+                        <p class="eyebrow">PREFERENCES</p>
+                        <h1>Settings</h1>
+                        <p class="page-description">
+                            Application configuration and connection details.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+
+                    <div class="settings-row">
+                        <div>
+                            <h3>Backend API</h3>
+                            <p>FastAPI server connection</p>
+                        </div>
+
+                        <span class="settings-value" id="apiUrlDisplay">
+                            http://127.0.0.1:8000
+                        </span>
+                    </div>
+
+                    <div class="settings-row">
+                        <div>
+                            <h3>AI Model</h3>
+                            <p>Language model used for responses</p>
+                        </div>
+
+                        <span class="settings-value">Gemini</span>
+                    </div>
+
+                    <div class="settings-row">
+                        <div>
+                            <h3>Vector Database</h3>
+                            <p>Document embedding storage</p>
+                        </div>
+
+                        <span class="settings-value">ChromaDB</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <span>© 2026 KnowledgeIQ</span>
+            <span>Powered by RAG & Gemini AI</span>
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- TOAST NOTIFICATIONS -->
+<div class="toast-container" id="toastContainer"></div>
+
+
+<!-- JAVASCRIPT -->
+<script src="js/app.js"></script>
+
+</body>
+</html>

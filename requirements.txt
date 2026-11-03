@@ -1,0 +1,28 @@
+# API
+fastapi
+uvicorn[standard]
+python-multipart
+
+# LangChain
+langchain
+langchain-community
+langchain-text-splitters
+langchain-google-genai
+
+# Gemini and Vector Database
+chromadb
+langchain-chroma
+
+# Document Processing
+pypdf
+python-docx
+
+# Configuration and Validation
+pydantic
+pydantic-settings
+python-dotenv
+
+# Testing
+pytest
+pytest-cov
+httpx
