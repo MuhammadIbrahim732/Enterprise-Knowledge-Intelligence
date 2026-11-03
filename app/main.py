@@ -44,7 +44,6 @@ app.include_router(chat_router)
 # Frontend directory
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
 
-# Serve frontend (keep this LAST)
 app.mount(
     "/",
     StaticFiles(directory=str(FRONTEND_DIR), html=True),
